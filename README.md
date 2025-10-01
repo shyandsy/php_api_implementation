@@ -1,6 +1,15 @@
 # php_api_implementation
 implement api from scratch using PHP
 
+## Dev Progress
+
+- [x] Docker Dev Env
+- [x] PSR-4: autoloader
+
+## Process Flow
+
+![process flow](doc/flow.png)
+
 ## Build Local Dev Environment
 
 Start docker which contain nginx & php. I have mysql and redis on my machine, so I haven't put them into docker file.
