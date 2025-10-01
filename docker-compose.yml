@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  php:
+    build: ./devops/php   # 用自定义 Dockerfile 装扩展
+    container_name: php-fpm
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - devnet
+
+  nginx:
+    image: nginx:1.25
+    container_name: nginx
+    ports:
+      - "8080:80"   # web browser http://localhost:8080
+    volumes:
+      - ./src:/var/www/html
+      - ./devops/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    external: true   # 复用你现有 mysql/redis 所在的网络
